@@ -5,8 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BranchWrapperDto {
+public class VaccineWrapperDto {
 
-    private List<BranchDto> branchDtoList;
-
+    private List<VaccineDto> vaccineDtoList;
 }

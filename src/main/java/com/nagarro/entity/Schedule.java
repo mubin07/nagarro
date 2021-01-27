@@ -1,49 +1,26 @@
 package com.nagarro.entity;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "schedule", schema = "vaccnow")
+@Data
 public class Schedule {
 
-    @EmbeddedId
-    private ScheduleId scheduleId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "schedule_id")
+    private Long scheduleId;
 
-    public Schedule() {
-    }
+    @Column(name = "branch_id")
+    private Long branchId;
 
-    public Schedule(final ScheduleId scheduleId) {
-        this.scheduleId = scheduleId;
-    }
+    @Column(name = "appointment_date")
+    private LocalDate appointmentDate;
 
-    public ScheduleId getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(final ScheduleId scheduleId) {
-        this.scheduleId = scheduleId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Schedule schedule = (Schedule) o;
-        return Objects.equals(scheduleId, schedule.scheduleId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(scheduleId);
-    }
-
-    @Override
-    public String toString() {
-        return "Schedule{" +
-                "scheduleId=" + scheduleId +
-                '}';
-    }
+    @Column(name = "slot_id")
+    private String slotId;
 }
