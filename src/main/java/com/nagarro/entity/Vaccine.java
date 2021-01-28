@@ -1,7 +1,9 @@
 package com.nagarro.entity;
 
 import com.nagarro.constants.PaymentMethod;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,10 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "vaccine", schema = "vaccnow")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vaccine {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vaccine_id")
     private Long vaccineId;
 
@@ -40,4 +44,13 @@ public class Vaccine {
     @Column(name = "is_applied")
     private Boolean isApplied;
 
+    public Vaccine(String patientEmail, Branch branch, LocalDate appointmentDate, LocalDateTime bookingDate, Slot slot, PaymentMethod paymentMethod, Boolean isApplied) {
+        this.patientEmail = patientEmail;
+        this.branch = branch;
+        this.appointmentDate = appointmentDate;
+        this.bookingDate = bookingDate;
+        this.slot = slot;
+        this.paymentMethod = paymentMethod;
+        this.isApplied = isApplied;
+    }
 }

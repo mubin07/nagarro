@@ -26,6 +26,6 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
     @Query("SELECT v.slot from Vaccine v where v.branch.branchId = :branchId and v.appointmentDate = :date")
     List<Slot> findBookedTimeSlotForDatePerBranch(@Param("branchId") Long branchId, @Param("date") LocalDate date);
 
-    @Query("SELECT v from Vaccine v where isApplied = false and v.appointmentDate <= :appointmentDate")
+    @Query("SELECT v from Vaccine v where isApplied = false and v.appointmentDate = :appointmentDate")
     List<Vaccine> findUnAppliedVaccineByDate(@Param("appointmentDate") LocalDate appointmentDate);
 }

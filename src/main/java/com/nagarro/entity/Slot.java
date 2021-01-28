@@ -1,6 +1,8 @@
 package com.nagarro.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "slot", schema = "vaccnow")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Slot {
 
     @Id

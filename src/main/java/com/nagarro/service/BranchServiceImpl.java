@@ -55,14 +55,14 @@ public class BranchServiceImpl implements BranchService {
         }
     }
 
-//    public BranchDto getBranchByName(final String branchName) throws BranchNotFoundException {
-//        Branch branch = branchRepository.findByName(branchName);
-//        if (null == branch) {
-//            throw new BranchNotFoundException("Branch not found for branch name " + branchName);
-//        } else {
-//            return modelMapper.map(branch, BranchDto.class);
-//        }
-//    }
+    public BranchDto getBranchByName(final String branchName) throws BranchNotFoundException {
+        Branch branch = branchRepository.findByName(branchName);
+        if (null == branch) {
+            throw new BranchNotFoundException("Branch not found for branch name " + branchName);
+        } else {
+            return modelMapper.map(branch, BranchDto.class);
+        }
+    }
 
     public Map<String, Long> getAvailableVaccineByBranch() throws BranchNotFoundException {
         List<BranchDto> branchList = getAllBranches();

@@ -11,6 +11,7 @@ import com.nagarro.entity.Vaccine;
 import com.nagarro.exception.AppointmentNotAvailableException;
 import com.nagarro.exception.SlotNotAvailableException;
 import com.nagarro.exception.VaccineNotAvailableException;
+import com.nagarro.exception.VaccineNotFoundException;
 import com.nagarro.repository.BranchRepository;
 import com.nagarro.repository.ScheduleRepository;
 import com.nagarro.repository.VaccineRepository;
@@ -49,6 +50,16 @@ public class VaccineServiceImpl implements VaccineService {
 
     @Autowired
     private ModelMapper modelmapper;
+
+    @Override
+    public List<VaccineDto> getAllVaccines() throws VaccineNotFoundException {
+        List<Vaccine> vaccineList = vaccineRepository.findAll();
+        if (vaccineList.isEmpty()) {
+            throw new VaccineNotFoundException("No vaccines found.");
+        } else {
+            return mapperService.mapList(vaccineList, VaccineDto.class);
+        }
+    }
 
     @Transactional
     public VaccineDto bookAppointment(VaccineDto vaccineDto) throws VaccineNotAvailableException, SlotNotAvailableException {
