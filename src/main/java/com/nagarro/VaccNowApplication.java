@@ -9,6 +9,8 @@ import com.nagarro.repository.BranchRepository;
 import com.nagarro.repository.ScheduleRepository;
 import com.nagarro.repository.SlotRepository;
 import com.nagarro.repository.VaccineRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,6 +37,8 @@ public class VaccNowApplication implements CommandLineRunner {
     @Autowired
     private VaccineRepository vaccineRepository;
 
+    private final Logger LOGGER = LoggerFactory.getLogger(VaccNowApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(VaccNowApplication.class, args);
     }
@@ -42,6 +46,7 @@ public class VaccNowApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Initialize the branch
+        LOGGER.info("Initializing the branch data");
         Branch branch1 = new Branch("Branch 01", 10L, 0L);
         Branch branch2 = new Branch("Branch 02", 20L, 0L);
         Branch branch3 = new Branch("Branch 03", 30L, 0L);
@@ -57,6 +62,7 @@ public class VaccNowApplication implements CommandLineRunner {
 
         branchRepository.saveAll(branchList);
 
+        LOGGER.info("Initializing the schedule data");
         Schedule schedule1 = new Schedule(1L, LocalDate.now(), "M1");
         Schedule schedule2 = new Schedule(2L, LocalDate.now(), "M1");
         Schedule schedule3 = new Schedule(3L, LocalDate.now(), "M1");
@@ -105,6 +111,7 @@ public class VaccNowApplication implements CommandLineRunner {
 
         scheduleRepository.saveAll(scheduleList);
 
+        LOGGER.info("Initializing the slot data");
         LocalTime localTime = LocalTime.of(9, 0, 0);
         Slot slot1 = new Slot("M1", localTime, localTime.plusMinutes(15));
         Slot slot2 = new Slot("M2", localTime.plusMinutes(15), localTime.plusMinutes(30));
@@ -213,6 +220,7 @@ public class VaccNowApplication implements CommandLineRunner {
 
         slotRepository.saveAll(slotList);
 
+        LOGGER.info("Initializing the vaccine data");
         Vaccine vaccine1 = new Vaccine("a1@gmail.com", branch1, LocalDate.now(), LocalDateTime.now(), slot1, PaymentMethod.CASH, false);
         Vaccine vaccine2 = new Vaccine("a2@gmail.com", branch2, LocalDate.now(), LocalDateTime.now(), slot1, PaymentMethod.CASH, false);
         Vaccine vaccine3 = new Vaccine("a3@gmail.com", branch3, LocalDate.now(), LocalDateTime.now(), slot1, PaymentMethod.CASH, false);

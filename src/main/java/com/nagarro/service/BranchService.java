@@ -15,6 +15,8 @@ public interface BranchService {
 
     BranchDto getBranchById(final Long branchId) throws BranchNotFoundException;
 
+    BranchDto getBranchByName(final String branchName) throws BranchNotFoundException;
+
     Map<String, Long> getAvailableVaccineByBranch() throws BranchNotFoundException;
 
     Map<String, Long> getAppliedVaccineByBranch() throws BranchNotFoundException;
